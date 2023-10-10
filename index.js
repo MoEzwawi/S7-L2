@@ -33,3 +33,28 @@ const currentUsername = () => {
 saveButton.addEventListener('click',save)
 deleteButton.addEventListener('click',reset)
 currentUsername()
+
+//second part of the exercise
+
+const secondsCount = document.getElementById('seconds')
+const minutesSpan = document.getElementById('after-a-minute')
+const minutesCount = document.getElementById('minutes')
+
+let i = sessionStorage.getItem('count') ? parseInt(sessionStorage.getItem('count')) : 0
+
+secondsCount.innerText = i
+
+const countTheSeconds = () => {
+    i++
+    sessionStorage.setItem('count',i)
+    secondsCount.innerText = i % 60
+    if (i>59) {
+        minutesCount.innerText = Math.floor(parseInt(sessionStorage.getItem('count'))/60)
+
+        minutesSpan.classList.remove('d-none')
+    }     
+}
+
+
+
+setInterval(countTheSeconds,1000)
